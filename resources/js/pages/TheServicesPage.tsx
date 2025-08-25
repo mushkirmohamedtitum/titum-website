@@ -1,7 +1,13 @@
-import React from "react";
+import GuestLayout from '@/layouts/app/guest-layout';
 
 const TheServicesPage = () => {
-  return <div>TheServicesPage</div>;
+    return (
+        <>
+            <GuestLayout>
+                <h1>TheServicesPage</h1>
+            </GuestLayout>
+        </>
+    );
 };
 
 export default TheServicesPage;

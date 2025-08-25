@@ -1,14 +1,12 @@
 <?php
 
+use App\Http\Controllers\Guest\ServiceController as GuestServiceController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Route::get('/', function () {
-//     return Inertia::render('welcome');
-// })->name('home');
-
 // Guest User routes
 Route::inertia('/', 'TheHomePage');
+Route::get('/{slug}', [GuestServiceController::class, 'show']);
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
