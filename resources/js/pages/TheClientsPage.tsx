@@ -1,7 +1,16 @@
-import React from "react";
+import GuestLayout from '@/layouts/app/guest-layout';
+import { Head } from '@inertiajs/react';
 
 const TheClientsPage = () => {
-  return <div>TheClientsPage</div>;
+    return (
+        <>
+            <Head title="Our Clients" />
+
+            <GuestLayout>
+                <h1>TheClientsPage</h1>
+            </GuestLayout>
+        </>
+    );
 };
 
 export default TheClientsPage;

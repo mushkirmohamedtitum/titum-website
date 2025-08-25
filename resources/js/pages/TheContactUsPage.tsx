@@ -1,7 +1,16 @@
-import React from "react";
+import GuestLayout from '@/layouts/app/guest-layout';
+import { Head } from '@inertiajs/react';
 
 const TheContactUsPage = () => {
-  return <div>TheContactUsPage</div>;
+    return (
+        <>
+            <Head title="Contact Us" />
+
+            <GuestLayout>
+                <h1>TheContactUsPage</h1>
+            </GuestLayout>
+        </>
+    );
 };
 
 export default TheContactUsPage;
