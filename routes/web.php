@@ -1,13 +1,16 @@
 <?php
 
-use App\Http\Controllers\Guest\ServiceController as GuestServiceController;
+use App\Http\Controllers\Guest\HomeController;
+use App\Http\Controllers\Guest\ServiceController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Guest User routes
-Route::inertia('/', 'TheHomePage');
-Route::get('/{slug}', [GuestServiceController::class, 'show']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
+
+// Guest User routes
+// Route::inertia('/', 'TheHomePage');
+// Route::get('/guest/{slug}', [ServiceController::class, 'show']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
@@ -17,3 +20,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
+
+Route::get('/{slug}', [ServiceController::class, 'show']);

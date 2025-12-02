@@ -1,15 +1,21 @@
-import type { Menu } from '@/interface/Menu';
-import { menu } from '@/utils/menu';
+import { THEME } from '@/constants/theme';
+import type { IMenu } from '@/interface/Menu';
 import { Link } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'motion/react';
-import { useState } from 'react';
-import CloseIcon from './icons/CloseIcon';
-import HumburgerMenu from './icons/HumburgerMenu';
-import { useTheme } from './ThemeProvider';
-import { ModeToggle } from './Toggle';
+import { FunctionComponent, useState } from 'react';
+import CloseIcon from '../components/icons/CloseIcon';
+import HumburgerMenu from '../components/icons/HumburgerMenu';
+import { useTheme } from '../components/ThemeProvider';
+import { ModeToggle } from '../components/Toggle';
 
-const TheNavbar = () => {
+interface ITheNavbar {
+    menus?: IMenu[];
+}
+
+const TheNavbar: FunctionComponent<ITheNavbar> = ({ menus }) => {
     const { theme } = useTheme();
+
+    console.log(menus);
 
     const [toggle, setToggle] = useState(false);
 
@@ -26,8 +32,8 @@ const TheNavbar = () => {
             pointerEvents: 'auto',
             transition: {
                 type: 'spring',
-                stiffness: 280, // snappy but not bouncy
-                damping: 24, // smooth stop
+                stiffness: 280,
+                damping: 24,
                 mass: 0.9,
             },
         },
@@ -35,27 +41,31 @@ const TheNavbar = () => {
 
     return (
         <section className="relative z-50 w-full">
-            <section className="gentium-plus-regular fixed top-0 right-0 left-0 mx-auto w-full px-10 py-8 shadow-md backdrop-blur-xl backdrop-filter lg:px-20">
-                <div className="mx-auto flex max-w-[1500px] items-center justify-between">
+            <section
+                className={`gentium-plus-regular fixed top-0 right-0 left-0 mx-auto w-full p-8 shadow-md backdrop-blur-xl backdrop-filter lg:px-20`}
+            >
+                <div
+                    className={`mx-auto flex max-w-[1500px] items-center justify-between rounded-lg ${theme == THEME.DARK ? 'bg-secondaryDarkBlack' : 'bg-slate-100'} px-6 py-3`}
+                >
                     {/* Logo */}
                     <Link href={'/'} className="w-20 lg:w-28">
-                        <img src={`${theme === 'dark' ? '/titum-logo-light.png' : '/titum-logo.png'}`} alt="Titum (Pvt) Ltd Logo" />
+                        <img src={`${theme === THEME.DARK ? '/titum-logo-light.png' : '/titum-logo.png'}`} alt="Titum (Pvt) Ltd Logo" />
                     </Link>
 
                     {/* Menus - Desktop Layout */}
                     <ul className="hidden items-center gap-x-3 lg:flex">
-                        {menu.map((menu: Menu) => {
+                        {menus?.map((menu: IMenu) => {
                             // console.log(menu);
 
                             return (
                                 <li key={menu.id}>
                                     <Link
                                         className={`${
-                                            theme === 'dark'
+                                            theme === THEME.DARK
                                                 ? 'duration-300 hover:border hover:border-slate-700 hover:bg-menuBgColorDarkTheme'
                                                 : 'hover:bg-logoPurple hover:text-slate-100 hover:duration-300'
                                         } rounded-md px-3 py-2`}
-                                        href={`${menu.link}`}
+                                        href={`/guest${menu.link}`}
                                     >
                                         {menu.label}
                                     </Link>
@@ -71,7 +81,7 @@ const TheNavbar = () => {
                         <button
                             type="button"
                             className={`${
-                                theme === 'dark' ? 'bg-white' : 'bg-logoPurple'
+                                theme === THEME.DARK ? 'bg-white' : 'bg-logoPurple'
                             } inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/50 transition-all hover:scale-[1.02] focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none`}
                         >
                             Let's talk
@@ -82,7 +92,11 @@ const TheNavbar = () => {
                     <div className="flex items-center lg:hidden">
                         <ModeToggle />
 
-                        <button type="button" className={`${theme === 'dark' ? '' : 'text-logoPurple'} text-xl`} onClick={() => setToggle(!toggle)}>
+                        <button
+                            type="button"
+                            className={`${theme === THEME.DARK ? '' : 'text-logoPurple'} text-xl`}
+                            onClick={() => setToggle(!toggle)}
+                        >
                             {toggle ? <CloseIcon /> : <HumburgerMenu />}
                         </button>
                     </div>
@@ -96,13 +110,13 @@ const TheNavbar = () => {
                                 animate="open"
                                 exit="closed"
                                 className={`${
-                                    theme === 'dark' ? 'bg-primaryBlack' : 'bg-white'
-                                } absolute top-20 right-0 left-0 flex flex-col items-start gap-y-3 py-8 pl-10 shadow-lg backdrop-blur-lg backdrop-filter lg:hidden`}
+                                    theme === THEME.DARK ? 'bg-primaryBlack' : 'bg-white'
+                                } absolute top-28 right-0 left-0 flex flex-col items-start gap-y-3 py-8 pl-10 shadow-lg backdrop-blur-lg backdrop-filter lg:hidden`}
                             >
                                 {/* <li>
             <ModeToggle />
           </li> */}
-                                {menu.map((menu: Menu) => {
+                                {menus?.map((menu: IMenu) => {
                                     // console.log(menu);
 
                                     return (
@@ -110,7 +124,7 @@ const TheNavbar = () => {
                                             <Link
                                                 onClick={() => setToggle(false)}
                                                 className={`${
-                                                    theme === 'dark'
+                                                    theme === THEME.DARK
                                                         ? 'duration-300 hover:border hover:border-slate-700 hover:bg-menuBgColorDarkTheme'
                                                         : 'hover:bg-logoPurple hover:text-slate-100 hover:duration-300'
                                                 } rounded-md px-3 py-2`}

@@ -33,6 +33,11 @@ class PageSeeder extends Seeder
                 'title' => 'Contact Us',
                 'slug' => 'contact-us',
                 'label' => 'Contact Us'
+            ],
+            [
+                'title' => 'Login',
+                'slug' => 'login',
+                'label' => 'Login'
             ]
         ];
 
