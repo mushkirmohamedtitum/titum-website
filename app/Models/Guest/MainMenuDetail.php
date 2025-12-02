@@ -16,6 +16,8 @@ class MainMenuDetail extends Model
 
     protected $guarded = [];
 
+    protected $keyType = 'string';
+
     public function scopeActive(Builder $query)
     {
         return $query->where(CommonColumns::IS_ACTIVE, StateTypes::ACTIVE);

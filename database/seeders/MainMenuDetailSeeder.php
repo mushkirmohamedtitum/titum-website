@@ -8,7 +8,10 @@ use App\Models\Guest\MainMenuDetail;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Symfony\Component\Uid\Uuid;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
+
+// use Symfony\Component\Uid\Uuid;
 
 class MainMenuDetailSeeder extends Seeder
 {
@@ -19,7 +22,8 @@ class MainMenuDetailSeeder extends Seeder
     {
         $menus = [
             [
-                // CommonColumns::ID => Uuid::v1(),
+                // CommonColumns::ID => Uuid::uuid4()->toString(),
+                CommonColumns::ID => Str::uuid(),
                 MainMenuDetailColumns::MENU_LABEL => 'Home',
                 CommonColumns::SLUG => '/',
                 CommonColumns::IS_ACTIVE => 1,
@@ -31,7 +35,8 @@ class MainMenuDetailSeeder extends Seeder
             ],
 
             [
-                // CommonColumns::ID => Uuid::v1(),
+                // CommonColumns::ID => Uuid::uuid4()->toString(),
+                CommonColumns::ID => Str::uuid(),
                 MainMenuDetailColumns::MENU_LABEL => 'Pricing',
                 CommonColumns::SLUG => '/pricing',
                 CommonColumns::IS_ACTIVE => 1,
@@ -42,7 +47,8 @@ class MainMenuDetailSeeder extends Seeder
             ],
 
             [
-                // CommonColumns::ID => Uuid::v1(),
+                // CommonColumns::ID => Uuid::uuid4()->toString(),
+                CommonColumns::ID => Str::uuid(),
                 MainMenuDetailColumns::MENU_LABEL => 'Clients',
                 CommonColumns::SLUG => '/clients',
                 CommonColumns::IS_ACTIVE => 1,
@@ -53,7 +59,8 @@ class MainMenuDetailSeeder extends Seeder
             ],
 
             [
-                // CommonColumns::ID => Uuid::v1(),
+                // CommonColumns::ID => Uuid::uuid4()->toString(),
+                CommonColumns::ID => Str::uuid(),
                 MainMenuDetailColumns::MENU_LABEL => 'Services',
                 CommonColumns::SLUG => '/services',
                 CommonColumns::IS_ACTIVE => 1,
@@ -64,7 +71,8 @@ class MainMenuDetailSeeder extends Seeder
             ],
 
             [
-                // CommonColumns::ID => Uuid::v1(),
+                // CommonColumns::ID => Uuid::uuid4()->toString(),
+                CommonColumns::ID => Str::uuid(),
                 MainMenuDetailColumns::MENU_LABEL => 'Careers',
                 CommonColumns::SLUG => '/careers',
                 CommonColumns::IS_ACTIVE => 1,
@@ -75,7 +83,8 @@ class MainMenuDetailSeeder extends Seeder
             ],
 
             [
-                // CommonColumns::ID => Uuid::v1(),
+                // CommonColumns::ID => Uuid::uuid4()->toString(),
+                CommonColumns::ID => Str::uuid(),
                 MainMenuDetailColumns::MENU_LABEL => 'About us',
                 CommonColumns::SLUG => '/about-us',
                 CommonColumns::IS_ACTIVE => 1,
@@ -86,7 +95,8 @@ class MainMenuDetailSeeder extends Seeder
             ],
 
             [
-                // CommonColumns::ID => Uuid::v1(),
+                // CommonColumns::ID => Uuid::uuid4()->toString(),
+                CommonColumns::ID => Str::uuid(),
                 MainMenuDetailColumns::MENU_LABEL => 'Contact us',
                 CommonColumns::SLUG => '/contact-us',
                 CommonColumns::IS_ACTIVE => 1,

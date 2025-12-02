@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\ModelColumns\CommonColumns;
+use App\Models\Guest\MainMenuDetail;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -39,6 +41,17 @@ class HandleInertiaRequests extends Middleware
     {
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
 
+
+        $columns = [
+            CommonColumns::CREATED_AT,
+            CommonColumns::CREATED_BY,
+            CommonColumns::UPDATED_AT,
+            CommonColumns::UPDATED_BY
+        ];
+        $menus = MainMenuDetail::active()->get();
+
+        $menus->makeHidden($columns);
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
@@ -46,7 +59,8 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
-            'ziggy' => fn (): array => [
+            'menus' => $menus,
+            'ziggy' => fn(): array => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],

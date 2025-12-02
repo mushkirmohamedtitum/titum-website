@@ -1,21 +1,19 @@
 import { THEME } from '@/constants/theme';
 import type { IMenu } from '@/interface/Menu';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'motion/react';
-import { FunctionComponent, useState } from 'react';
+import { useState } from 'react';
 import CloseIcon from '../components/icons/CloseIcon';
 import HumburgerMenu from '../components/icons/HumburgerMenu';
 import { useTheme } from '../components/ThemeProvider';
 import { ModeToggle } from '../components/Toggle';
 
-interface ITheNavbar {
-    menus?: IMenu[];
-}
-
-const TheNavbar: FunctionComponent<ITheNavbar> = ({ menus }) => {
+const TheNavbar = () => {
     const { theme } = useTheme();
 
-    console.log(menus);
+    // console.log();
+
+    const { menus } = usePage().props;
 
     const [toggle, setToggle] = useState(false);
 
@@ -65,9 +63,9 @@ const TheNavbar: FunctionComponent<ITheNavbar> = ({ menus }) => {
                                                 ? 'duration-300 hover:border hover:border-slate-700 hover:bg-menuBgColorDarkTheme'
                                                 : 'hover:bg-logoPurple hover:text-slate-100 hover:duration-300'
                                         } rounded-md px-3 py-2`}
-                                        href={`/guest${menu.link}`}
+                                        href={`${menu.slug}`}
                                     >
-                                        {menu.label}
+                                        {menu.menu_label}
                                     </Link>
                                 </li>
                             );
@@ -128,9 +126,9 @@ const TheNavbar: FunctionComponent<ITheNavbar> = ({ menus }) => {
                                                         ? 'duration-300 hover:border hover:border-slate-700 hover:bg-menuBgColorDarkTheme'
                                                         : 'hover:bg-logoPurple hover:text-slate-100 hover:duration-300'
                                                 } rounded-md px-3 py-2`}
-                                                href={`${menu.link}`}
+                                                href={`${menu.slug}`}
                                             >
-                                                {menu.label}
+                                                {menu.menu_label}
                                             </Link>
                                         </li>
                                     );
