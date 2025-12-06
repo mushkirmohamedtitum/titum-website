@@ -180,10 +180,16 @@
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-logoPurple: #400640;
+    --color-logoPurple_100: #663766;
+    --color-logoPurple_200: #795079;
+    --color-logoPurple_300: #8c698c;
+    --color-logoPurple_400: #9f829f;
+    --color-logoPurple_500: #b29bb2;
     --color-menuBgColorDarkTheme: #0f172a;
     --color-primaryBlack: #0a0a0a;
     --color-secondaryDarkBlack: #191919;
     --color-secondaryLightWhite: #fffcf0;
+    --color-secondaryBlack: #2e3130;
 }
 
 :root {
@@ -285,4 +291,11 @@ button {
 
 li {
     @apply list-none;
+}
+
+@layer base {
+    ul,
+    ol {
+        list-style: revert;
+    }
 }

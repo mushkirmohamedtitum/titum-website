@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Enums\ModelColumns\CommonColumns;
+use App\Enums\ModelColumns\MainMenuDetailColumns;
 use App\Http\Controllers\Controller;
 use App\Models\Guest\MainMenuDetail;
 use Exception;
@@ -24,7 +25,9 @@ class HomeController extends Controller
                 CommonColumns::UPDATED_AT,
                 CommonColumns::UPDATED_BY
             ];
-            $menus = MainMenuDetail::active()->get();
+            $menus = MainMenuDetail::active()
+                ->orderBy(MainMenuDetailColumns::ORDER, 'asc')
+                ->get();
 
             $menus->makeHidden($columns);
 

@@ -20,6 +20,8 @@ class ServiceController extends Controller
 
         $data = ['page' => $page];
 
+        // dd($slug);
+
         if ($pageSlug === PageSlugType::SERVICES) {
 
             return Inertia::render('TheServicesPage', $data);
@@ -38,6 +40,10 @@ class ServiceController extends Controller
         if ($pageSlug === PageSlugType::CONTACT_US) {
 
             return Inertia::render('TheContactUsPage', $data);
+        }
+
+        if ($pageSlug === PageSlugType::CAREERS) {
+            return Inertia::render('TheCareersPage', []);
         }
     }
 }

@@ -51,7 +51,7 @@ const TheNavbar = () => {
                     </Link>
 
                     {/* Menus - Desktop Layout */}
-                    <ul className="hidden items-center gap-x-3 lg:flex">
+                    <ul className="hidden items-center gap-x-3 xl:flex">
                         {menus?.map((menu: IMenu) => {
                             // console.log(menu);
 
@@ -73,7 +73,7 @@ const TheNavbar = () => {
                     </ul>
 
                     {/* For Desktop Layout */}
-                    <div className="hidden items-center gap-x-5 lg:flex">
+                    <div className="hidden items-center gap-x-5 xl:flex">
                         <ModeToggle />
 
                         <button
@@ -87,7 +87,7 @@ const TheNavbar = () => {
                     </div>
 
                     {/*  Nav menu button & Theme button - Mobile Layout */}
-                    <div className="flex items-center lg:hidden">
+                    <div className="flex items-center xl:hidden">
                         <ModeToggle />
 
                         <button
@@ -109,7 +109,7 @@ const TheNavbar = () => {
                                 exit="closed"
                                 className={`${
                                     theme === THEME.DARK ? 'bg-primaryBlack' : 'bg-white'
-                                } absolute top-28 right-0 left-0 flex flex-col items-start gap-y-3 py-8 pl-10 shadow-lg backdrop-blur-lg backdrop-filter lg:hidden`}
+                                } absolute top-28 right-0 left-0 flex flex-col items-start gap-y-3 py-8 pl-10 shadow-lg backdrop-blur-lg backdrop-filter xl:hidden`}
                             >
                                 {/* <li>
             <ModeToggle />

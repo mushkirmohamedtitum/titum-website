@@ -2,7 +2,8 @@
 
 namespace App\Enums\ModelColumns;
 
-enum MainMenuDetailColumns
+enum MainMenuDetailColumns: string
 {
     const MENU_LABEL = 'menu_label';
+    const ORDER = 'order';
 }

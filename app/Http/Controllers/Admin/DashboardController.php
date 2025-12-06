@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        dd(auth()->user()->id);
+        // dd(auth()->user()->id);
         return Inertia::render('dashboard', []);
     }
 }

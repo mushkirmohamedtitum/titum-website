@@ -9,4 +9,5 @@ enum PageSlugType: string
     case ABOUT_US = "about-us";
     case CONTACT_US = "contact-us";
     case LOGIN = 'login';
+    case CAREERS = 'careers';
 }

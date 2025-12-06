@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('menu_label');
             $table->string('slug');
+            $table->integer('order');
             $table->tinyInteger('is_active')->default(1);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');

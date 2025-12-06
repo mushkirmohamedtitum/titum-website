@@ -4,7 +4,7 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, Sid
 import { THEME } from '@/constants/theme';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { LayoutGrid } from 'lucide-react';
+import { Lamp, LayoutGrid, Settings, User, UserCheck2 } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
 const mainNavItems: NavItem[] = [
@@ -12,6 +12,31 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,
+    },
+    {
+        title: 'User',
+        href: '',
+        icon: User,
+    },
+    {
+        title: 'User Role',
+        href: '',
+        icon: UserCheck2,
+    },
+    {
+        title: 'Clients',
+        href: '',
+        icon: Settings,
+    },
+    {
+        title: 'Services',
+        href: '',
+        icon: Lamp,
+    },
+    {
+        title: 'Pricing',
+        href: '',
+        // icon: ,
     },
 ];
 
