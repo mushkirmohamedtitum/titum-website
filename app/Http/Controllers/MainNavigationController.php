@@ -1,28 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Guest;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Guest\MainMenuDetail;
-use Exception;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
+use App\Http\Requests\StoreMainNavigationRequest;
+use App\Http\Requests\UpdateMainNavigationRequest;
+use App\Models\MainNavigation;
 
-class MainMenuDetailController extends Controller
+class MainNavigationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        try {
-
-            $menus = MainMenuDetail::select('*')->get();
-
-            return Inertia::render('TheNavbar', ['menus' => $menus]);
-        } catch (\Throwable $th) {
-            throw new Exception($th);
-        }
+        //
     }
 
     /**
@@ -36,7 +27,7 @@ class MainMenuDetailController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMainNavigationRequest $request)
     {
         //
     }
@@ -44,7 +35,7 @@ class MainMenuDetailController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(MainNavigation $mainNavigation)
     {
         //
     }
@@ -52,7 +43,7 @@ class MainMenuDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(MainNavigation $mainNavigation)
     {
         //
     }
@@ -60,7 +51,7 @@ class MainMenuDetailController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateMainNavigationRequest $request, MainNavigation $mainNavigation)
     {
         //
     }
@@ -68,7 +59,7 @@ class MainMenuDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(MainNavigation $mainNavigation)
     {
         //
     }
