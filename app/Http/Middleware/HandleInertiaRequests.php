@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Enums\ModelColumns\CommonColumns;
 use App\Enums\ModelColumns\MainNavigationAccessRoleColumns;
+use App\Enums\StateTypes;
 use App\Models\Guest\MainMenuDetail;
 use App\Models\Navigation\MainNavigation;
 use Illuminate\Foundation\Inspiring;
@@ -56,9 +57,13 @@ class HandleInertiaRequests extends Middleware
         $menus->makeHidden($columns);
 
         // Admin Side-bar navigation menu query
-        $adminNavMenus = MainNavigation::whereHas('mainNavigationAccessUserRole', function ($query) {
-            $query->where(MainNavigationAccessRoleColumns::ROLE_CODE, '=', Auth::user()?->role_code);
-        })
+        $adminNavMenus = MainNavigation::with(['levelOneNavigation' => function ($query) {
+            $query->where(CommonColumns::IS_ACTIVE, StateTypes::ACTIVE);
+        }])
+            ->whereHas('mainNavigationAccessUserRole', function ($query) {
+                $query->where(MainNavigationAccessRoleColumns::ROLE_CODE, '=', Auth::user()?->role_code);
+            })
+            ->orderBy(CommonColumns::ORDER, 'ASC')
             ->get();
 
         return [
