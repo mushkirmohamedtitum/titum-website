@@ -12,4 +12,5 @@ enum CommonColumns: string
     const ID = 'id';
     const SLUG = 'slug';
     const ORDER = 'order';
+    const CODE = 'code';
 }

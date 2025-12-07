@@ -3,7 +3,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { THEME } from '@/constants/theme';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { Lamp, LayoutGrid, Settings, User, UserCheck2 } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
@@ -55,6 +55,12 @@ const mainNavItems: NavItem[] = [
 
 export function AppSidebar() {
     const { theme } = useTheme();
+
+    // console.log(usePage().props);
+
+    const { adminNavMenus } = usePage().props;
+
+    console.log(adminNavMenus);
 
     return (
         <Sidebar collapsible="icon" variant="inset">

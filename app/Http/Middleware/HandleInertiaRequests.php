@@ -3,9 +3,12 @@
 namespace App\Http\Middleware;
 
 use App\Enums\ModelColumns\CommonColumns;
+use App\Enums\ModelColumns\MainNavigationAccessRoleColumns;
 use App\Models\Guest\MainMenuDetail;
+use App\Models\Navigation\MainNavigation;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
@@ -52,6 +55,12 @@ class HandleInertiaRequests extends Middleware
 
         $menus->makeHidden($columns);
 
+        // Admin Side-bar navigation menu query
+        $adminNavMenus = MainNavigation::whereHas('mainNavigationAccessUserRole', function ($query) {
+            $query->where(MainNavigationAccessRoleColumns::ROLE_CODE, '=', Auth::user()->role_code);
+        })
+            ->get();
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
@@ -60,6 +69,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'menus' => $menus,
+            'adminNavMenus' => $adminNavMenus,
             'ziggy' => fn(): array => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

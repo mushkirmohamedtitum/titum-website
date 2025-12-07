@@ -77,7 +77,15 @@ class MainNavigationSeeder extends Seeder
                 CommonColumns::UPDATED_AT => Carbon::now()
             ],
 
-
+            [
+                MainNavigationColumns::LABEL => 'Careers',
+                MainNavigationColumns::PATH => '/careers',
+                MainNavigationColumns::ICONS => 'User',
+                CommonColumns::ORDER => 7,
+                CommonColumns::IS_ACTIVE => StateTypes::ACTIVE,
+                CommonColumns::CREATED_AT => Carbon::now(),
+                CommonColumns::UPDATED_AT => Carbon::now()
+            ],
         ];
 
         foreach ($mainNavigations as $nav) {
