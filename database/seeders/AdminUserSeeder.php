@@ -14,11 +14,15 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!User::whereEmail('mushkirmohamed@gmail.com')->first()) {
+        if (!User::where('email', 'mushkirmohamed@gmail.com')->exists()) {
             User::create([
                 'name' => 'Mohamed Mushkir',
                 'email' => 'mushkirmohamed@gmail.com',
-                'password' => Hash::make("Password")
+                'password' => Hash::make("Password"),
+                'role_code' => 2001,
+                'is_active' => 1,
+                // 'created_by' => null,
+                // 'updated_by' => null
             ]);
         }
     }

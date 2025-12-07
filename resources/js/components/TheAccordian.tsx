@@ -18,11 +18,17 @@ const TheAccordian = () => {
         >
             <AccordionItem value="1">
                 <div>
-                    <AccordionTrigger className={`${theme == THEME.DARK ? '' : 'text-logoPurple'}`}>Senior Inventory Specialist</AccordionTrigger>
+                    <AccordionTrigger className={`${theme == THEME.DARK ? '' : 'text-logoPurple selection:bg-logoPurple selection:text-slate-100'}`}>
+                        Senior Inventory Specialist
+                    </AccordionTrigger>
                     <ul className="-mt-2 flex items-center space-x-3 pb-3">
                         <li>
                             <small className="mr-1 text-[0.7rem]">📌</small>
-                            <small className={`${theme == THEME.DARK ? 'text-slate-300' : 'text-green-700'}`}>Full Time</small>
+                            <small
+                                className={`${theme == THEME.DARK ? 'text-slate-300' : 'text-green-700 selection:bg-logoPurple selection:text-slate-200'}`}
+                            >
+                                Full Time
+                            </small>
                         </li>
                         <li>
                             <small className="mr-1 text-[0.7rem]">📌</small>
