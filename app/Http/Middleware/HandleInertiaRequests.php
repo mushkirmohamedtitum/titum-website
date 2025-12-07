@@ -57,7 +57,7 @@ class HandleInertiaRequests extends Middleware
 
         // Admin Side-bar navigation menu query
         $adminNavMenus = MainNavigation::whereHas('mainNavigationAccessUserRole', function ($query) {
-            $query->where(MainNavigationAccessRoleColumns::ROLE_CODE, '=', Auth::user()->role_code);
+            $query->where(MainNavigationAccessRoleColumns::ROLE_CODE, '=', Auth::user()?->role_code);
         })
             ->get();
 
