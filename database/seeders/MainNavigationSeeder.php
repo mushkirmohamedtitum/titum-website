@@ -5,10 +5,8 @@ namespace Database\Seeders;
 use App\Enums\ModelColumns\CommonColumns;
 use App\Enums\ModelColumns\MainNavigationColumns;
 use App\Enums\StateTypes;
-use App\Models\MainNavigation;
 use App\Models\Navigation\MainNavigation as NavigationMainNavigation;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MainNavigationSeeder extends Seeder

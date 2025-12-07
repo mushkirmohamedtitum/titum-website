@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             MainMenuDetailSeeder::class,
             MainNavigationSeeder::class,
+            MainNavigationAccessRoleSeeder::class,
             PageSeeder::class
         ]);
     }
