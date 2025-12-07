@@ -11,4 +11,5 @@ enum CommonColumns: string
     const UPDATED_AT = 'updated_at';
     const ID = 'id';
     const SLUG = 'slug';
+    const ORDER = 'order';
 }
