@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Careers;
 
+use App\Enums\ModelColumns\CommonColumns;
+use App\Enums\ModelColumns\UserColumns;
 use App\Http\Controllers\Controller;
+use App\Models\Careers\CareersHeroMainContent;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +16,24 @@ class HeroMainController extends Controller
      */
     public function index()
     {
-        return Inertia::render('admin/careers/hero-main/TheHeroContents', []);
+        $data = CareersHeroMainContent::with([
+            'createdBy' => function ($query) {
+                $query->select(
+                    CommonColumns::ID,
+                    UserColumns::NAME
+                );
+            },
+
+            'updatedBy' => function ($query) {
+                $query->select(
+                    CommonColumns::ID,
+                    UserColumns::NAME
+                );
+            },
+        ])
+            ->paginate(5);
+
+        return Inertia::render('admin/careers/hero-main/TheHeroContents', ['data' => $data]);
     }
 
     /**

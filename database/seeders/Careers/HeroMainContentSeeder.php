@@ -25,7 +25,72 @@ class HeroMainContentSeeder extends Seeder
                 CommonColumns::UPDATED_AT => Carbon::now(),
                 CommonColumns::CREATED_BY => 1,
                 CommonColumns::UPDATED_BY => 1
-            ]
+            ],
+
+            [
+                CareersHeroMainContentColumns::HERO_MAIN_CONTENT => 'Titum is here to make it easier and more efficient for you to grow your business with trusted solutions and support.',
+                CommonColumns::IS_ACTIVE => StateTypes::ACTIVE,
+                CommonColumns::CREATED_AT => Carbon::now(),
+                CommonColumns::UPDATED_AT => Carbon::now(),
+                CommonColumns::CREATED_BY => 1,
+                CommonColumns::UPDATED_BY => 1
+            ],
+
+            [
+                CareersHeroMainContentColumns::HERO_MAIN_CONTENT => 'Titum is here to make it easier and more efficient for you to grow your business with trusted solutions and support.',
+                CommonColumns::IS_ACTIVE => StateTypes::ACTIVE,
+                CommonColumns::CREATED_AT => Carbon::now(),
+                CommonColumns::UPDATED_AT => Carbon::now(),
+                CommonColumns::CREATED_BY => 1,
+                CommonColumns::UPDATED_BY => 1
+            ],
+
+            [
+                CareersHeroMainContentColumns::HERO_MAIN_CONTENT => 'Titum is here to make it easier and more efficient for you to grow your business with trusted solutions and support.',
+                CommonColumns::IS_ACTIVE => StateTypes::ACTIVE,
+                CommonColumns::CREATED_AT => Carbon::now(),
+                CommonColumns::UPDATED_AT => Carbon::now(),
+                CommonColumns::CREATED_BY => 1,
+                CommonColumns::UPDATED_BY => 1
+            ],
+
+            [
+                CareersHeroMainContentColumns::HERO_MAIN_CONTENT => 'Titum is here to make it easier and more efficient for you to grow your business with trusted solutions and support.',
+                CommonColumns::IS_ACTIVE => StateTypes::ACTIVE,
+                CommonColumns::CREATED_AT => Carbon::now(),
+                CommonColumns::UPDATED_AT => Carbon::now(),
+                CommonColumns::CREATED_BY => 1,
+                CommonColumns::UPDATED_BY => 1
+            ],
+
+            [
+                CareersHeroMainContentColumns::HERO_MAIN_CONTENT => 'Titum is here to make it easier and more efficient for you to grow your business with trusted solutions and support.',
+                CommonColumns::IS_ACTIVE => StateTypes::ACTIVE,
+                CommonColumns::CREATED_AT => Carbon::now(),
+                CommonColumns::UPDATED_AT => Carbon::now(),
+                CommonColumns::CREATED_BY => 1,
+                CommonColumns::UPDATED_BY => 1
+            ],
+
+            [
+                CareersHeroMainContentColumns::HERO_MAIN_CONTENT => 'Titum is here to make it easier and more efficient for you to grow your business with trusted solutions and support.',
+                CommonColumns::IS_ACTIVE => StateTypes::ACTIVE,
+                CommonColumns::CREATED_AT => Carbon::now(),
+                CommonColumns::UPDATED_AT => Carbon::now(),
+                CommonColumns::CREATED_BY => 1,
+                CommonColumns::UPDATED_BY => 1
+            ],
+
+            [
+                CareersHeroMainContentColumns::HERO_MAIN_CONTENT => 'Titum is here to make it easier and more efficient for you to grow your business with trusted solutions and support.',
+                CommonColumns::IS_ACTIVE => StateTypes::ACTIVE,
+                CommonColumns::CREATED_AT => Carbon::now(),
+                CommonColumns::UPDATED_AT => Carbon::now(),
+                CommonColumns::CREATED_BY => 1,
+                CommonColumns::UPDATED_BY => 1
+            ],
+
+
         ];
 
         foreach ($contents as $content) {
