@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Careers;
 
+use App\Enums\CommonRangeNumbers;
 use App\Enums\ModelColumns\CommonColumns;
 use App\Enums\ModelColumns\UserColumns;
 use App\Http\Controllers\Controller;
@@ -31,7 +32,7 @@ class HeroMainController extends Controller
                 );
             },
         ])
-            ->paginate(5);
+            ->paginate(CommonRangeNumbers::PER_PAGE_PAGINATE_NO);
 
         return Inertia::render('admin/careers/hero-main/TheHeroContents', ['data' => $data]);
     }
