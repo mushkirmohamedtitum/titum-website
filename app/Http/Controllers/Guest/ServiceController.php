@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Guest;
 
+use App\Enums\ModelColumns\Careers\HeroMainContentColumns;
+use App\Enums\ModelColumns\CommonColumns;
 use App\Enums\PageSlugType;
 use App\Http\Controllers\Controller;
+use App\Models\Careers\CareersHeroMainContent;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -43,7 +46,22 @@ class ServiceController extends Controller
         }
 
         if ($pageSlug === PageSlugType::CAREERS) {
-            return Inertia::render('TheCareersPage', []);
+
+            return Inertia::render('TheCareersPage', ['data' => $this->getCareerPageData()]);
         }
+    }
+
+    private function getCareerPageData()
+    {
+
+        $data = CareersHeroMainContent::select(
+            HeroMainContentColumns::HERO_MAIN_CONTENT,
+            CommonColumns::ID
+        )
+            ->active()
+            ->orderBy(CommonColumns::CREATED_AT, 'DESC')
+            ->first();
+
+        return $data;
     }
 }

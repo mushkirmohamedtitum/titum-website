@@ -1,16 +1,22 @@
 import TheHeroSection from '@/components/home/TheHeroSection';
 import TheSecondChild from '@/components/home/TheSecondChild';
 import WhoWeAre from '@/components/home/WhoWeAre';
+import { ICareersHeroMainContent } from '@/interface/careers/HeroMainContent';
 import GuestLayout from '@/layouts/app/guest-layout';
 import { Head } from '@inertiajs/react';
+import { FunctionComponent } from 'react';
 
-const TheHomePage = () => {
+interface ITheHomePage {
+    data?: ICareersHeroMainContent;
+}
+
+const TheHomePage: FunctionComponent<ITheHomePage> = ({ data }) => {
     return (
         <>
             <Head title="Home" />
 
             <GuestLayout>
-                <TheHeroSection />
+                <TheHeroSection heroMainContent={data} />
 
                 <TheSecondChild />
 

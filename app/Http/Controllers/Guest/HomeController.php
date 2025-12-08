@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Guest;
 
+use App\Enums\ModelColumns\Careers\HeroMainContentColumns;
 use App\Enums\ModelColumns\CommonColumns;
-use App\Enums\ModelColumns\MainMenuDetailColumns;
 use App\Http\Controllers\Controller;
+use App\Models\Careers\CareersHeroMainContent;
 use App\Models\Guest\MainMenuDetail;
 use Exception;
 use Illuminate\Http\Request;
@@ -19,19 +20,17 @@ class HomeController extends Controller
     {
         try {
 
-            $columns = [
-                CommonColumns::CREATED_AT,
-                CommonColumns::CREATED_BY,
-                CommonColumns::UPDATED_AT,
-                CommonColumns::UPDATED_BY
-            ];
-            $menus = MainMenuDetail::active()
-                ->orderBy(MainMenuDetailColumns::ORDER, 'asc')
-                ->get();
+            // $data = CareesHeroMainContent::select(
+            //     HeroMainContentColumns::HERO_MAIN_CONTENT,
+            //     CommonColumns::ID
+            // )
+            //     ->active()
+            //     ->orderBy(CommonColumns::CREATED_AT, 'DESC')
+            //     ->first();r
 
-            $menus->makeHidden($columns);
+            // dd($data);
 
-            return Inertia::render('TheHomePage', ['menus' => $menus]);
+            return Inertia::render('TheHomePage', ['data' => []]);
         } catch (\Throwable $th) {
             throw new Exception($th);
         }

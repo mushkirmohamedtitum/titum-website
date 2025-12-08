@@ -1,7 +1,13 @@
 import { THEME } from '@/constants/theme';
+import { ICareersHeroMainContent } from '@/interface/careers/HeroMainContent';
+import { FunctionComponent } from 'react';
 import { useTheme } from '../ThemeProvider';
 
-const TheHeroSection = () => {
+interface ITheHeroSection {
+    heroMainContent?: ICareersHeroMainContent;
+}
+
+const TheHeroSection: FunctionComponent<ITheHeroSection> = ({ heroMainContent }) => {
     const { theme } = useTheme();
 
     return (
@@ -29,7 +35,8 @@ const TheHeroSection = () => {
                             : 'text-logoPurple selection:bg-green-800 selection:text-white'
                     } text-center text-3xl font-[800] md:text-5xl md:leading-[4.3rem]`}
                 >
-                    Titum is here to make it easier and more efficient for you to grow your business with trusted solutions and support.
+                    {heroMainContent?.hero_main_content ??
+                        'Titum is here to make it easier and more efficient for you to grow your business with trusted solutions and support.'}
                 </h2>
 
                 <span
