@@ -20,7 +20,6 @@ const AddNew = () => {
 
     return (
         <Dialog>
-            {/* <form> */}
             <DialogTrigger asChild>
                 <Button
                     variant="outline"
@@ -35,7 +34,7 @@ const AddNew = () => {
                     <DialogTitle>Create New</DialogTitle>
                     <DialogDescription>Make changes to your content here. Click save when you&apos;re done.</DialogDescription>
                 </DialogHeader>
-                <form action="">
+                <form>
                     <div className="grid gap-4">
                         <div className="grid gap-3">
                             <Label htmlFor="name-1">Name</Label>
@@ -57,7 +56,6 @@ const AddNew = () => {
                     </DialogFooter>
                 </form>
             </DialogContent>
-            {/* </form> */}
         </Dialog>
     );
 };

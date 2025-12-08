@@ -11,10 +11,10 @@ import { defaultDateFormat } from '@/utils/utils';
 import { ColumnDef } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 
-export const columns: ColumnDef<ICareersHeroMainContent>[] = [
+export const columns = (handleRowAction: (action: string, row: ICareersHeroMainContent) => void): ColumnDef<ICareersHeroMainContent>[] => [
     {
         accessorKey: 'hero_main_content',
-        header: () => <div>{TABLE_COLUMN_NAMES.MAIN_CONTENT}</div>,
+        header: () => <div className="">{TABLE_COLUMN_NAMES.MAIN_CONTENT}</div>,
     },
     {
         accessorKey: 'is_active',
@@ -30,7 +30,7 @@ export const columns: ColumnDef<ICareersHeroMainContent>[] = [
         header: () => <div>{TABLE_COLUMN_NAMES.CREATED_BY}</div>,
         cell: ({ row }) => {
             // console.log();
-            return <span>{row?.original?.created_by?.name}</span>;
+            return <span className="text-green-700">{row?.original?.created_by?.name}</span>;
         },
     },
     {
@@ -38,21 +38,21 @@ export const columns: ColumnDef<ICareersHeroMainContent>[] = [
         header: () => <div>{TABLE_COLUMN_NAMES.UPDATED_BY}</div>,
         cell: ({ row }) => {
             // console.log();
-            return <span>{row?.original?.updated_by?.name}</span>;
+            return <span className="text-green-700">{row?.original?.updated_by?.name}</span>;
         },
     },
     {
         accessorKey: 'created_at',
         header: () => <div>{TABLE_COLUMN_NAMES.CREATED_BY}</div>,
         cell: ({ row }) => {
-            return <span>{readableDateFormat(row.getValue('created_at'), defaultDateFormat)}</span>;
+            return <span className="text-green-700">{readableDateFormat(row.getValue('created_at'), defaultDateFormat)}</span>;
         },
     },
     {
         accessorKey: 'updated_at',
         header: () => <div>{TABLE_COLUMN_NAMES.UPDATED_AT}</div>,
         cell: ({ row }) => {
-            return <span>{readableDateFormat(row.getValue('updated_at'), defaultDateFormat)}</span>;
+            return <span className="text-green-700">{readableDateFormat(row.getValue('updated_at'), defaultDateFormat)}</span>;
         },
     },
     {
@@ -70,9 +70,9 @@ export const columns: ColumnDef<ICareersHeroMainContent>[] = [
                             <MoreHorizontal />
                         </Button>
                     </DropdownMenuTrigger>
-                    
+
                     <DropdownMenuContent align="end">
-                        <DropdownMenuItem className="cursor-pointer">
+                        <DropdownMenuItem onClick={() => handleRowAction(actionOptionsArr[0].label, row?.original)} className="cursor-pointer">
                             <span>
                                 <ViewIcon />
                             </span>
@@ -82,7 +82,11 @@ export const columns: ColumnDef<ICareersHeroMainContent>[] = [
 
                         {actionOptionsArr.slice(1).map((option: IActionOptions) => {
                             return (
-                                <DropdownMenuItem key={option.code} className="cursor-pointer">
+                                <DropdownMenuItem
+                                    key={option.code}
+                                    onClick={() => handleRowAction(option.label, row?.original)}
+                                    className="cursor-pointer"
+                                >
                                     {option?.icon && (
                                         <span>
                                             <option.icon />
