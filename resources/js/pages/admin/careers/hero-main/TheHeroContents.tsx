@@ -1,4 +1,3 @@
-import { useTheme } from '@/components/ThemeProvider';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -13,6 +12,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { ACTION_TYPE } from '@/constants/ActionTypes';
 import { CONFIRMATION_ALERT_MESSAGE } from '@/constants/AlertMessage';
+import { HTTP_METHODS } from '@/constants/HttpMethods';
+import { deleteRecord } from '@/helpers/commonFunctions';
 import { ICareersHeroMainContent } from '@/interface/careers/HeroMainContent';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem } from '@/types';
@@ -55,7 +56,7 @@ const TheHeroContents: FunctionComponent<ITheHeroContents> = ({ data }) => {
 
     const alertButtonRef = useRef<HTMLButtonElement>(null);
 
-    const { theme } = useTheme();
+    // const { theme } = useTheme();
 
     const [selectedRow, setSelectedRow] = useState(initHeroContent);
 
@@ -67,24 +68,6 @@ const TheHeroContents: FunctionComponent<ITheHeroContents> = ({ data }) => {
             setSelectedRow(row);
             alertButtonRef.current?.click();
         }
-
-        // if (action == ACTION_TYPE.MODIFY_STATUS) {
-        //     setUserAction(action);
-        //     setSelectedRow(row);
-        //     alertButtonRef.current?.click();
-        // }
-
-        // if (action == ACTION_TYPE.DELETE) {
-        //     setUserAction(action);
-        //     setSelectedRow(row);
-        //     alertButtonRef.current?.click();
-        // }
-
-        // if (action == ACTION_TYPE.MODIFY) {
-        //     setUserAction(action);
-        //     setSelectedRow(row);
-        //     alertButtonRef.current?.click();
-        // }
     };
 
     const handleReset = () => {
@@ -141,6 +124,10 @@ const TheHeroContents: FunctionComponent<ITheHeroContents> = ({ data }) => {
                                     onClick={() => {
                                         if (userAction == ACTION_TYPE.MODIFY_STATUS) {
                                             console.log('implement status update logic!');
+                                        }
+
+                                        if (userAction == ACTION_TYPE.DELETE) {
+                                            deleteRecord('hero-main', selectedRow.id, HTTP_METHODS.DELETE, handleReset);
                                         }
                                     }}
                                 >

@@ -7,6 +7,7 @@ use App\Enums\ModelColumns\CommonColumns;
 use App\Enums\ModelColumns\UserColumns;
 use App\Http\Controllers\Controller;
 use App\Models\Careers\CareersHeroMainContent;
+use Exception;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -82,6 +83,14 @@ class HeroMainController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $data = CareersHeroMainContent::find($id);
+
+            $data->delete();
+
+            return redirect()->back()->with('success', 'Record deleted');
+        } catch (\Throwable $th) {
+            throw new Exception($th);
+        }
     }
 }
