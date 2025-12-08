@@ -20,10 +20,10 @@ class LevelOneNavigationSeeder extends Seeder
             // Careers sub menu
             [
                 LevelOneNavigationColumns::LABEL => 'Hero Main Content',
-                LevelOneNavigationColumns::PATH => '/hero-main',
+                LevelOneNavigationColumns::PATH => '/careers/hero-main',
                 LevelOneNavigationColumns::ICONS => 'User',
                 CommonColumns::ORDER => 1,
-                LevelOneNavigationColumns::MAIN_NAVIGATION_ID => 7,
+                LevelOneNavigationColumns::MAIN_NAVIGATION_ID => 7, // Careers
                 CommonColumns::IS_ACTIVE => 1,
                 CommonColumns::CREATED_AT => Carbon::now(),
                 CommonColumns::UPDATED_AT => Carbon::now()
@@ -31,7 +31,7 @@ class LevelOneNavigationSeeder extends Seeder
 
             [
                 LevelOneNavigationColumns::LABEL => 'Hero Secondary Content',
-                LevelOneNavigationColumns::PATH => '/hero-secondary',
+                LevelOneNavigationColumns::PATH => '/careers/hero-secondary',
                 LevelOneNavigationColumns::ICONS => 'User',
                 CommonColumns::ORDER => 2,
                 LevelOneNavigationColumns::MAIN_NAVIGATION_ID => 7,
@@ -42,7 +42,7 @@ class LevelOneNavigationSeeder extends Seeder
 
             [
                 LevelOneNavigationColumns::LABEL => 'Openings Section Heading',
-                LevelOneNavigationColumns::PATH => '/opening-section-heading',
+                LevelOneNavigationColumns::PATH => '/careers/opening-section-heading',
                 LevelOneNavigationColumns::ICONS => 'User',
                 CommonColumns::ORDER => 3,
                 LevelOneNavigationColumns::MAIN_NAVIGATION_ID => 7,
@@ -53,7 +53,7 @@ class LevelOneNavigationSeeder extends Seeder
 
             [
                 LevelOneNavigationColumns::LABEL => 'Openings',
-                LevelOneNavigationColumns::PATH => '/openings',
+                LevelOneNavigationColumns::PATH => '/careers/openings',
                 LevelOneNavigationColumns::ICONS => 'User',
                 CommonColumns::ORDER => 4,
                 LevelOneNavigationColumns::MAIN_NAVIGATION_ID => 7,

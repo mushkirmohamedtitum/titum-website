@@ -92,12 +92,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                                     >
                                                         <SidebarMenuItem>
                                                             <SidebarMenuButton asChild>
-                                                                <a
-                                                                    href={'#'}
+                                                                <Link
+                                                                    href={`/admin${levelOne.path}`}
                                                                     className={`pl-5 ${theme == THEME.DARK ? 'text-gray-400' : 'text-gray-600'}`}
                                                                 >
                                                                     {levelOne.label}
-                                                                </a>
+                                                                </Link>
                                                             </SidebarMenuButton>
                                                         </SidebarMenuItem>
                                                     </motion.div>
