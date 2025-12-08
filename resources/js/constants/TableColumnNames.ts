@@ -7,4 +7,8 @@ export const TABLE_COLUMN_NAMES = {
     ACTIONS: 'Actions',
     STATUS: 'Status',
     ACTIVE: 'Active',
+    VIEW: 'View',
+    MODIFY: 'Modify',
+    DELETE: 'Delete',
+    CHANGE: 'Change',
 };
