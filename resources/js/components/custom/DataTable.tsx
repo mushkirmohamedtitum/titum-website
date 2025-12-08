@@ -97,6 +97,9 @@ export function DataTable<TData, TValue>({ columns, data, endpoint }: DataTableP
                 <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
                     Previous
                 </Button>
+
+                <small className="text-gray-400">{`Page ${data.current_page} of ${data.last_page}`}</small>
+
                 <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
                     Next
                 </Button>
