@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Careers;
 
 use App\Enums\CommonRangeNumbers;
+use App\Enums\ModelColumns\Careers\HeroMainContentColumns;
 use App\Enums\ModelColumns\CommonColumns;
 use App\Enums\ModelColumns\UserColumns;
 use App\Enums\StateTypes;
@@ -35,6 +36,7 @@ class HeroMainController extends Controller
                 );
             },
         ])
+            ->orderBy(CommonColumns::CREATED_AT, "DESC")
             ->paginate(CommonRangeNumbers::PER_PAGE_PAGINATE_NO);
 
         return Inertia::render('admin/careers/hero-main/TheHeroContents', ['data' => $data]);
@@ -53,7 +55,26 @@ class HeroMainController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        try {
+            DB::beginTransaction();
+
+            CareersHeroMainContent::create([
+                HeroMainContentColumns::HERO_MAIN_CONTENT => $request['mainContent'],
+                CommonColumns::IS_ACTIVE => StateTypes::ACTIVE,
+                CommonColumns::CREATED_BY => getCurrentUserId(),
+                CommonColumns::UPDATED_BY => getCurrentUserId(),
+                CommonColumns::CREATED_AT => getCurrentDateTime(),
+                CommonColumns::UPDATED_AT => getCurrentDateTime()
+            ]);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'New record created.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw new Exception($th);
+        }
     }
 
     /**
