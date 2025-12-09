@@ -12,8 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { ACTION_TYPE } from '@/constants/ActionTypes';
 import { CONFIRMATION_ALERT_MESSAGE } from '@/constants/AlertMessage';
-import { HTTP_METHODS } from '@/constants/HttpMethods';
-import { deleteRecord } from '@/helpers/commonFunctions';
+import { deleteRecord, handleChangeRecordStatus } from '@/helpers/commonFunctions';
 import { ICareersHeroMainContent } from '@/interface/careers/HeroMainContent';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem } from '@/types';
@@ -123,11 +122,11 @@ const TheHeroContents: FunctionComponent<ITheHeroContents> = ({ data }) => {
                                     // className={`${theme == THEME.DARK ? '' : 'bg-logoPurple transition-all hover:bg-logoPurpleHover'}`}
                                     onClick={() => {
                                         if (userAction == ACTION_TYPE.MODIFY_STATUS) {
-                                            console.log('implement status update logic!');
+                                            handleChangeRecordStatus('hero-section', selectedRow?.id, handleReset);
                                         }
 
                                         if (userAction == ACTION_TYPE.DELETE) {
-                                            deleteRecord('hero-main', selectedRow.id, HTTP_METHODS.DELETE, handleReset);
+                                            deleteRecord('hero-main', selectedRow.id, handleReset);
                                         }
                                     }}
                                 >

@@ -19,6 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Careers Menu
         Route::prefix('careers')->group(function () {
             Route::resource('hero-main', HeroMainController::class);
+            Route::put('hero-section/{id}', [HeroMainController::class, 'updateStatus']);
         });
     });
 });
