@@ -54,6 +54,7 @@ const TheHeroContents: FunctionComponent<ITheHeroContents> = ({ data }) => {
     };
 
     const alertButtonRef = useRef<HTMLButtonElement>(null);
+    const openEditModalRef = useRef<HTMLButtonElement>(null);
 
     // const { theme } = useTheme();
 
@@ -66,6 +67,12 @@ const TheHeroContents: FunctionComponent<ITheHeroContents> = ({ data }) => {
             setUserAction(action);
             setSelectedRow(row);
             alertButtonRef.current?.click();
+        }
+
+        if (action == ACTION_TYPE.VIEW) {
+            setUserAction(action);
+            setSelectedRow(row);
+            openEditModalRef.current?.click();
         }
     };
 
@@ -114,12 +121,10 @@ const TheHeroContents: FunctionComponent<ITheHeroContents> = ({ data }) => {
                                     onClick={() => {
                                         handleReset?.();
                                     }}
-                                    // className={`${theme == THEME.DARK ? '' : 'border-logoPurple_500 text-logoPurple'}`}
                                 >
                                     Cancel
                                 </AlertDialogCancel>
                                 <AlertDialogAction
-                                    // className={`${theme == THEME.DARK ? '' : 'bg-logoPurple transition-all hover:bg-logoPurpleHover'}`}
                                     onClick={() => {
                                         if (userAction == ACTION_TYPE.MODIFY_STATUS) {
                                             handleChangeRecordStatus('hero-section', selectedRow?.id, handleReset);
@@ -127,6 +132,10 @@ const TheHeroContents: FunctionComponent<ITheHeroContents> = ({ data }) => {
 
                                         if (userAction == ACTION_TYPE.DELETE) {
                                             deleteRecord('hero-main', selectedRow.id, handleReset);
+                                        }
+
+                                        if (userAction == ACTION_TYPE.MODIFY) {
+                                            openEditModalRef.current?.click();
                                         }
                                     }}
                                 >
@@ -139,7 +148,7 @@ const TheHeroContents: FunctionComponent<ITheHeroContents> = ({ data }) => {
 
                 {/* Add New */}
                 <div className="mb-5">
-                    <AddNew />
+                    <AddNew ref={openEditModalRef} row={selectedRow} handleReset={handleReset} />
                 </div>
 
                 <DataTable columns={columns(handleRowAction)} data={data} endpoint="hero-main" />

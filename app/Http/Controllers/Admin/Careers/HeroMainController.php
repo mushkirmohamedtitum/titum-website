@@ -98,7 +98,24 @@ class HeroMainController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $record = CareersHeroMainContent::find($id);
+
+            $record->update([
+                HeroMainContentColumns::HERO_MAIN_CONTENT => $request['mainContent'],
+                CommonColumns::UPDATED_BY => getCurrentUserId(),
+                CommonColumns::UPDATED_AT => getCurrentDateTime()
+            ]);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Record has been updated!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw new Exception($th);
+        }
     }
 
     /**

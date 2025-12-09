@@ -15,13 +15,20 @@ import { FieldGroup } from '@/components/ui/field';
 import { THEME } from '@/constants/theme';
 import { TOAST_MESSAGE_TYPE } from '@/constants/ToastMessageType';
 import { handleToastMessage } from '@/helpers/handleShowToastMessage';
+import { ICareersHeroMainContent } from '@/interface/careers/HeroMainContent';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
+import { ForwardedRef, forwardRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import z from 'zod/v3';
 
-const AddNew = () => {
+interface IAddNew {
+    row?: ICareersHeroMainContent;
+    handleReset?: () => void;
+}
+
+const AddNew = forwardRef<HTMLButtonElement, IAddNew>(({ row, handleReset }, ref: ForwardedRef<HTMLButtonElement>) => {
     const { theme } = useTheme();
 
     const formSchema = z.object({
@@ -33,53 +40,85 @@ const AddNew = () => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            mainContent: '',
-        },
     });
 
     const onSubmit = (data: z.infer<typeof formSchema>) => {
         // console.log(data);
 
-        try {
-            router.visit('hero-main', {
-                method: 'post',
-                data,
-                preserveScroll: false,
-                preserveState: false,
-                onSuccess: () => {
-                    // toast('Success');
-                    handleToastMessage(TOAST_MESSAGE_TYPE.SUCCESS, 'New main content has been created.');
-                    form.reset();
-                },
-                onError: (errors) => {
-                    console.log(errors);
-                    handleToastMessage(TOAST_MESSAGE_TYPE.ERROR, 'An error occured! Please try again...');
-                },
-            });
-        } catch (error) {
-            console.log(error);
-            handleToastMessage(TOAST_MESSAGE_TYPE.ERROR, 'An error occured! Please try again...');
+        if (row?.id) {
+            try {
+                router.visit(`hero-main/${row?.id}`, {
+                    method: 'put',
+                    data,
+                    preserveScroll: false,
+                    preserveState: false,
+                    onSuccess: () => {
+                        // toast('Success');
+                        handleToastMessage(TOAST_MESSAGE_TYPE.SUCCESS, 'Content has been updated successfully.');
+                        form.reset();
+                        handleReset?.();
+                    },
+                    onError: (errors) => {
+                        console.log(errors);
+                        handleToastMessage(TOAST_MESSAGE_TYPE.ERROR, 'An error occured! Please try again...');
+                    },
+                });
+            } catch (error) {
+                console.log(error);
+                handleToastMessage(TOAST_MESSAGE_TYPE.ERROR, 'An error occured! Please try again...');
+            }
+        } else {
+            try {
+                router.visit('hero-main', {
+                    method: 'post',
+                    data,
+                    preserveScroll: false,
+                    preserveState: false,
+                    onSuccess: () => {
+                        // toast('Success');
+                        handleToastMessage(TOAST_MESSAGE_TYPE.SUCCESS, 'New main content has been created.');
+                        form.reset();
+                    },
+                    onError: (errors) => {
+                        console.log(errors);
+                        handleToastMessage(TOAST_MESSAGE_TYPE.ERROR, 'An error occured! Please try again...');
+                    },
+                });
+            } catch (error) {
+                console.log(error);
+                handleToastMessage(TOAST_MESSAGE_TYPE.ERROR, 'An error occured! Please try again...');
+            }
         }
     };
+
+    useEffect(() => {
+        if (row) {
+            form.reset({
+                mainContent: row.hero_main_content,
+            });
+        }
+    }, [row]);
 
     return (
         <Dialog>
             <DialogTrigger asChild>
                 <Button
                     variant="outline"
+                    ref={ref}
                     className={`${theme == THEME.DARK ? '' : 'bg-logoPurple text-slate-200 transition-all hover:bg-logoPurpleHover hover:text-slate-50'}`}
                 >
                     <Plus />
                     <span>Add New</span>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[600px]">
+            <DialogContent reset={handleReset} className="sm:max-w-[600px]">
                 <DialogHeader>
-                    <DialogTitle className={`text-xl ${theme == THEME.DARK ? 'text-slate-200' : 'text-logoPurple'}`}>Create New</DialogTitle>
+                    <DialogTitle className={`text-xl ${theme == THEME.DARK ? 'text-slate-200' : 'text-logoPurple'}`}>
+                        {row?.id ? '' : 'Create New'}
+                    </DialogTitle>
 
                     <DialogDescription className={`${theme == THEME.DARK ? '' : 'text-logoPurple_300'}`}>
-                        Make changes to your content here. Click save when you&apos;re done.
+                        Make changes to your content here. Click {row?.id ? 'save changes' : 'save'} when you&apos;re done.
                     </DialogDescription>
                 </DialogHeader>
 
@@ -98,18 +137,37 @@ const AddNew = () => {
 
                     <DialogFooter className="mt-5">
                         <DialogClose asChild>
-                            <Button type="button" variant="outline">
+                            <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => {
+                                    handleReset?.();
+                                }}
+                            >
                                 Cancel
                             </Button>
                         </DialogClose>
+                        <DialogClose asChild>
+                            <Button
+                                type="reset"
+                                className="bg-red-900 transition-all hover:bg-red-800"
+                                variant="outline"
+                                onClick={() => {
+                                    handleReset?.();
+                                    form.reset();
+                                }}
+                            >
+                                Reset
+                            </Button>
+                        </DialogClose>
                         <Button className={`${theme == THEME.DARK ? '' : 'bg-logoPurple'}`} type="submit">
-                            Submit
+                            {row?.id ? 'Save Changes' : 'Submit'}
                         </Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
         </Dialog>
     );
-};
+});
 
 export default AddNew;
