@@ -1,3 +1,4 @@
+import TheTextInput from '@/components/form/TheTextInput';
 import { useTheme } from '@/components/ThemeProvider';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,13 +11,34 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { FieldGroup } from '@/components/ui/field';
 import { THEME } from '@/constants/theme';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Plus } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import z from 'zod/v3';
 
 const AddNew = () => {
     const { theme } = useTheme();
+
+    const formSchema = z.object({
+        mainContent: z
+            .string()
+            .min(5, 'Hero section main content must be at least 5 characters.')
+            .max(32, 'Hero section main content must be at most 32 characters.'),
+    });
+
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            mainContent: '',
+        },
+    });
+
+    const onSubmit = (data: z.infer<typeof formSchema>) => {
+        // console.log(data);
+        console.log(data);
+    };
 
     return (
         <Dialog>
@@ -29,21 +51,24 @@ const AddNew = () => {
                     <span>Add New</span>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[600px]">
                 <DialogHeader>
-                    <DialogTitle>Create New</DialogTitle>
-                    <DialogDescription>Make changes to your content here. Click save when you&apos;re done.</DialogDescription>
+                    <DialogTitle className={`text-xl ${theme == THEME.DARK ? 'text-slate-200' : 'text-logoPurple'}`}>Create New</DialogTitle>
+                    <DialogDescription className={`${theme == THEME.DARK ? '' : 'text-logoPurple_300'}`}>
+                        Make changes to your content here. Click save when you&apos;re done.
+                    </DialogDescription>
                 </DialogHeader>
-                <form>
+                <form onSubmit={form.handleSubmit(onSubmit)}>
                     <div className="grid gap-4">
-                        <div className="grid gap-3">
-                            <Label htmlFor="name-1">Name</Label>
-                            <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
-                        </div>
-                        <div className="grid gap-3">
-                            <Label htmlFor="username-1">Username</Label>
-                            <Input id="username-1" name="username" defaultValue="@peduarte" />
-                        </div>
+                        <FieldGroup>
+                            <TheTextInput
+                                id="mainContent"
+                                label="Main Content"
+                                required
+                                form={form}
+                                placeholder="Enter you careers hero main content here..."
+                            />
+                        </FieldGroup>
                     </div>
 
                     <DialogFooter className="mt-5">
@@ -52,7 +77,9 @@ const AddNew = () => {
                                 Cancel
                             </Button>
                         </DialogClose>
-                        <Button type="submit">Submit</Button>
+                        <Button className={`${theme == THEME.DARK ? '' : 'bg-logoPurple'}`} type="submit">
+                            Submit
+                        </Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
