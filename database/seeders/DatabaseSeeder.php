@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Database\Seeders\Careers\HeroMainContentSeeder;
+use Database\Seeders\Careers\HeroSecondaryContentSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -29,7 +30,8 @@ class DatabaseSeeder extends Seeder
             MainNavigationAccessRoleSeeder::class,
             LevelOneNavigationSeeder::class,
             HeroMainContentSeeder::class,
-            PageSeeder::class
+            PageSeeder::class,
+            HeroSecondaryContentSeeder::class,
         ]);
     }
 }

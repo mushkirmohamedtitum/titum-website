@@ -1,5 +1,8 @@
 <?php
 
+use App\Enums\ModelColumns\CommonColumns;
+use App\Enums\ModelsList;
+use App\Enums\StateTypes;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,8 +15,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('hero_secondary_contents', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('content', 255);
+            $table->tinyInteger('is_active')->default(StateTypes::ACTIVE);
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by');
             $table->timestamps();
+
+            $table->foreign(CommonColumns::CREATED_BY)
+                ->references(CommonColumns::ID)
+                ->on(ModelsList::USER)
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign(CommonColumns::UPDATED_BY)
+                ->references(CommonColumns::ID)
+                ->on(ModelsList::USER)
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

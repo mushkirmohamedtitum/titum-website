@@ -11,4 +11,5 @@ export const TABLE_COLUMN_NAMES = {
     MODIFY: 'Modify',
     DELETE: 'Delete',
     CHANGE: 'Change',
+    CONTENTS: 'Contents'
 };

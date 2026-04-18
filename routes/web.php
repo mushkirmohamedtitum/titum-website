@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Careers\HeroMainController;
+use App\Http\Controllers\Admin\Careers\HeroSecondaryContentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Guest\HomeController;
 use App\Http\Controllers\Guest\ServiceController;
@@ -21,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::resource('hero-main', HeroMainController::class);
             Route::put('hero-section/{id}', [HeroMainController::class, 'updateStatus']);
 
-            Route::resource('hero-secondary', HomeController::class);
+            Route::resource('hero-secondary', HeroSecondaryContentController::class);
         });
     });
 });
