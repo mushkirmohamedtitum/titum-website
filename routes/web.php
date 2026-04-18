@@ -20,6 +20,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('careers')->group(function () {
             Route::resource('hero-main', HeroMainController::class);
             Route::put('hero-section/{id}', [HeroMainController::class, 'updateStatus']);
+
+            Route::resource('hero-secondary', HomeController::class);
         });
     });
 });
